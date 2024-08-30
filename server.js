@@ -11,7 +11,30 @@ app.use(cors({
     credentials: true // 자격 증명 허용
 }));
 
-app.use(express.json()); // body-parser가 Express 4.16.0 이후 기본 내장됨
+app.use(express.json());
+
+const kafka = new Kafka({
+    brokers: [process.env.KAFKA_BROKERS],
+    sasl: {
+        mechanism: 'plain',
+        username: process.env.KAFKA_USERNAME,
+        password: process.env.KAFKA_PASSWORD
+    },
+    ssl: true, // SSL 암호화를 사용해야 함
+});
+
+// Producer 생성
+const producer = kafka.producer();
+const runProducer = async () => {
+    try {
+        console.log('Connecting to Kafka producer...');
+        await producer.connect();
+        console.log('Kafka producer connected.');
+    } catch (error) {
+        console.error('Error connecting to Kafka producer:', error);
+    }
+};
+runProducer().catch(console.error);
 
 // 클릭 이벤트 기록을 위한 API 엔드포인트
 app.post('/api/click', async (req, res) => {
