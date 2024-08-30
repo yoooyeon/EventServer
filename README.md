@@ -22,12 +22,12 @@ Kafka와 MongoDB를 활용하여 높은 트래픽에서도 안정적으로 데�
    npm install
     ```
 2. **환경 변수 설정**
-```bash
+   ```bash
    MONGODB_URI=mongodb://your-mongo-uri
-    PORT=4000
-    KAFKA_BROKERS=your-kafka-broker
-    KAFKA_USERNAME=your-kafka-username
-    KAFKA_PASSWO=your-kafka-password
+   PORT=4000
+   KAFKA_BROKERS=your-kafka-broker
+   KAFKA_USERNAME=your-kafka-username
+   KAFKA_PASSWO=your-kafka-password
    ```
 3. **실행**
    ```bash
